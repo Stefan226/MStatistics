@@ -23,6 +23,8 @@ namespace Core
         public string DateAndTime { get { return dateAndTime; } set { dateAndTime = value; } }
         string dateAndTimeUTC;
         public string DateAndTimeUTC { get { return dateAndTimeUTC; } set { dateAndTimeUTC = value; } }
+        string scene;
+        public string Scene { get {return scene; } set {scene = value; } }
         string eventName;
         public string EventName { get { return eventName; } set { eventName = value; } }
         string eventValue;
@@ -56,8 +58,9 @@ namespace Core
             country = eventDataBuffer[1];
             dateAndTime = eventDataBuffer[2];
             dateAndTimeUTC = eventDataBuffer[3];
-            eventName = eventDataBuffer[4];
-            eventValue = eventDataBuffer[5];
+            scene = eventDataBuffer[4];
+            eventName = eventDataBuffer[5];
+            eventValue = eventDataBuffer[6];
 
             date = dateAndTime.Split(' ')[0].Split(':')[1];
             year = date.Split('/')[2];
@@ -74,6 +77,7 @@ namespace Core
         {
             Console.WriteLine("I: " + i);
             Console.WriteLine("DATE/TIME: " + dateAndTime);
+            Console.WriteLine("SCENE: " + scene);
             Console.WriteLine("EVENT NAME: " + eventName);
             Console.WriteLine("EVENT VALUE: " + eventValue);
             Console.WriteLine("*********************");
