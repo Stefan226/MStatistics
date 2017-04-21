@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Core.KPI;
 
 namespace Core
 {
@@ -27,11 +28,12 @@ namespace Core
             playerData.Print();
             //data.Print();
 
-            Console.WriteLine("Daily Active Users: " + data.GetDailyActiveUsers());
-            Console.WriteLine(data.GetSessionTime(playerData));
-            Console.WriteLine(data.GetSessionTimeInt(playerData));
-            Console.WriteLine("Average session: " + data.GetAvgSessionTime(TIME.SECONDS));
-            Console.WriteLine("Average session: " + data.GetAvgSessionTime(TIME.MINUTES));
+            Session session = new Session();
+
+            Console.WriteLine("Daily Active Users: " + new DAU().GetDailyActiveUsers("2017-04-16"));
+            Console.WriteLine(session.GetSessionTime(playerData));
+            Console.WriteLine(session.GetSessionTimeInt(playerData));
+            Console.WriteLine("Average session: " + session.GetAvgSessionTime(data.GetPlayers(), TIME.MINUTES));
 
             Console.ReadLine();
         }
