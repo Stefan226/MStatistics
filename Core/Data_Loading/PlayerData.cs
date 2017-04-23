@@ -61,5 +61,10 @@ namespace Core
         {
             return playerData.Count;
         }
+
+        public List<Event> GetEvents()
+        {
+            return events;
+        }
     }
 }

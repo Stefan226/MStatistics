@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data Loading\Data.cs" />
-    <Compile Include="Data Loading\Event.cs" />
-    <Compile Include="Data Loading\PlayerData.cs" />
+    <Compile Include="Data_Loading\Data.cs" />
+    <Compile Include="Data_Loading\Event.cs" />
+    <Compile Include="Data_Loading\PlayerData.cs" />
+    <Compile Include="Event_Processing\EventProcessor.cs" />
+    <Compile Include="Event_Processing\events\TournamentEvent.cs" />
     <Compile Include="KPI\DAU.cs" />
     <Compile Include="KPI\Session.cs" />
     <Compile Include="Program.cs" />

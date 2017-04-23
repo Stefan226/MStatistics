@@ -18,33 +18,34 @@ namespace Core
         string[] eventDataBuffer = new string[512];
 
         string country;
-        public string Country { get { return country; } set { country = value; } }
         string dateAndTime;
-        public string DateAndTime { get { return dateAndTime; } set { dateAndTime = value; } }
         string dateAndTimeUTC;
-        public string DateAndTimeUTC { get { return dateAndTimeUTC; } set { dateAndTimeUTC = value; } }
         string scene;
-        public string Scene { get {return scene; } set {scene = value; } }
         string eventName;
-        public string EventName { get { return eventName; } set { eventName = value; } }
         string eventValue;
-        public string EventValue { get { return eventValue; } set { eventValue = value; } }
         string date;
-        public string Date { get { return date; } set { date = value; } }
         string year;
-        public string Year { get { return year; } set { year = value; } }
         string month;
-        public string Month { get { return month; } set { month = value; } }
         string day;
-        public string Day { get { return day; } set { day = value; } }
         string time;
-        public string Time { get { return time; } set { time = value; } }
         string hour;
-        public string Hour { get { return hour; } set { hour = value; } }
         string minute;
-        public string Minute { get { return minute; } set { minute = value; } }
         string second;
-        public string Second { get { return second; } set { second = value; } }
+
+        public string Country { get => country; set => country = value; }
+        public string DateAndTime { get => dateAndTime; set => dateAndTime = value; }
+        public string DateAndTimeUTC { get => dateAndTimeUTC; set => dateAndTimeUTC = value; }
+        public string Scene { get => scene; set => scene = value; }
+        public string EventName { get => eventName; set => eventName = value; }
+        public string EventValue { get => eventValue; set => eventValue = value; }
+        public string Date { get => date; set => date = value; }
+        public string Year { get => year; set => year = value; }
+        public string Month { get => month; set => month = value; }
+        public string Day { get => day; set => day = value; }
+        public string Time { get => time; set => time = value; }
+        public string Hour { get => hour; set => hour = value; }
+        public string Minute { get => minute; set => minute = value; }
+        public string Second { get => second; set => second = value; }
 
         public Event()
         {
