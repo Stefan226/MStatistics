@@ -12,7 +12,8 @@ namespace Core
         string rawData;
         List<string> allData = new List<string>();
         List<PlayerData> players = new List<PlayerData>();
-        string[] playerIDs = new string[2048];
+        string[] playerIDs;
+        int numberOfFiles;
 
         public Data()
         {
@@ -22,6 +23,7 @@ namespace Core
         public Data(string path)
         {
             rawData = ReadAll(path);
+            playerIDs = new string[numberOfFiles * 10];
             FilterData(rawData);
         }
 
@@ -36,8 +38,9 @@ namespace Core
                 foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
                 {
                     data += File.ReadAllText(file);
+                    numberOfFiles++;
                 }
-                return data;
+                return data + "END";
             }
             Console.WriteLine(finalPath);
             Console.WriteLine("Invalid Date");
@@ -60,13 +63,18 @@ namespace Core
                     if (splitIterator > 0)
                     {
                         playerData.Add(allData[splitIterator - 1]);
+
                         if (playerIDs[splitIterator - 1] != playerIDs[splitIterator])
                         {
                             players.Add(new PlayerData(playerData));
                             playerData.Clear();
                         }
+                        else if (rawData.Split(splitChar)[splitIterator + 1] == "END")
+                        {
+                            playerData.Add(allData[splitIterator]);
+                            players.Add(new PlayerData(playerData));
+                        }
                     }
-
                     splitIterator++;
                 }
             }

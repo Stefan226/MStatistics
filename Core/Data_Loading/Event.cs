@@ -15,7 +15,7 @@ namespace Core
 
     public class Event
     {
-        string[] eventDataBuffer = new string[512];
+        string[] eventDataBuffer;
 
         string country;
         string dateAndTime;
@@ -54,6 +54,7 @@ namespace Core
 
         public Event(string playerData, char splitChar = ',')
         {
+            eventDataBuffer = new string[playerData.Split(splitChar).Length];
             eventDataBuffer = playerData.Split(splitChar);
 
             country = eventDataBuffer[1];

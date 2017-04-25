@@ -26,9 +26,9 @@ namespace Core
             //string playerID = Console.ReadLine();
             ////PlayerData playerData = new PlayerData(data.LoadPlayerData(playerID));
 
-            //PlayerData playerData = data.GetPlayerData(playerID);
+            PlayerData playerData = data.GetPlayerData("g11990376020229995298");
 
-            //playerData.Print();
+            playerData.Print();
             ////data.Print();
 
             //Session session = new Session();
@@ -38,18 +38,24 @@ namespace Core
             //Console.WriteLine(session.GetSessionTimeInt(playerData));
             //Console.WriteLine("Average session: " + session.GetAvgSessionTime(data.GetPlayers(), TIME.MINUTES));
 
-            EventProcessor processor = new EventProcessor(data.GetPlayerData("g11990376020229995298"));
-            try
+            //EventProcessor processor = new EventProcessor(data.GetPlayerData("g11990376020229995298"));
+            //try
+            //{
+            //    TournamentEvent tournament = new TournamentEvent(processor);
+            //    tournament.Print();
+            //    Console.WriteLine("Games Won: " + tournament.GamesWon);
+            //    Console.WriteLine("Games Lost: " + tournament.GamesLost);
+            //    Console.WriteLine("Ads Watched: " + tournament.AdsWatched);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //}
+
+            foreach (PlayerData player in data.GetPlayers())
             {
-                TournamentEvent tournament = new TournamentEvent(processor);
-                tournament.Print();
-                Console.WriteLine("Games Won: " + tournament.GamesWon);
-                Console.WriteLine("Games Lost: " + tournament.GamesLost);
-                Console.WriteLine("Ads Watched: " + tournament.AdsWatched);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                if (player.PlayerID == "g01528621778490560522")
+                    Console.WriteLine("NASAO");
             }
 
             Console.ReadLine();
