@@ -51,16 +51,19 @@ namespace Core.KPI
             return -1;
         }
 
-        public string GetWeeklyActiveUsers(MONTHS month, string pathBegin, string pathEnd, int dayIndex = 5)
+        public int GetActiveUsers(MONTHS month, string pathBegin, string pathEnd, int dayIndex = 0)
         {
-            string finalPath = "Analytics/" + "2016-" + (int)month + "-" + pathBegin;
+            string finalPath = "Analytics/" + "2017-" + "0" + (int)month + "-" + pathBegin;
 
-            int finalNumb = 0;
-
-            string[] days = new string[7];
+            int finalNumb;
 
             int begin = Convert.ToInt32(pathBegin);
             int end = Convert.ToInt32(pathEnd);
+
+            string[] days = new string[(end - begin) + 1];
+
+            if (dayIndex == 0)
+                dayIndex = days.Length - 2;
 
             for (int i = days.Length - 1; i >= 0; i--)
             {
@@ -70,17 +73,20 @@ namespace Core.KPI
                     days[i] = (end - i) + "";
             }
 
-            Console.WriteLine("eeee");
-
-            if (Directory.Exists(finalPath))
-                finalNumb += Directory.GetFiles(finalPath).Length;
+            finalNumb = Directory.GetFiles(finalPath).Length;
 
             if (pathBegin != pathEnd)
             {
-                return GetWeeklyActiveUsers(month, days[dayIndex], pathEnd, --dayIndex);
+                finalNumb += GetActiveUsers(month, days[dayIndex], pathEnd, --dayIndex);
             }
 
-            return finalNumb + "";
+            return finalNumb;
+        }
+
+        public int GetActiveUsersAVG(MONTHS month, string pathBegin, string pathEnd, int dayIndex = 0)
+        {
+            int sum = GetActiveUsers(month, pathBegin, pathEnd, dayIndex);
+            return sum / 7;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Core
         public Data(string path)
         {
             rawData = ReadAll(path);
-            playerIDs = new string[8000];
+            playerIDs = new string[15000];
             FilterData(rawData);
         }
 
@@ -80,32 +80,28 @@ namespace Core
 
         void FilterData(string rawData, char splitChar = '&')
         {
-            int splitIterator = 0;
             List<string> playerData = new List<string>();
+            string[] rawDataSplit = rawData.Split(splitChar);
 
-            for (int i = 0; i < rawData.Length; i++)
+            for (int i = 0; i < rawDataSplit.Length - 1; i++)
             {
-                if (rawData[i] == splitChar)
+                allData.Add(rawDataSplit[i]);
+                playerIDs[i] = allData[i].Split(',')[1];
+
+                if (i > 0)
                 {
-                    allData.Add(rawData.Split(splitChar)[splitIterator]);
-                    playerIDs[splitIterator] = allData[splitIterator].Split(',')[1];
+                    playerData.Add(allData[i - 1]);
 
-                    if (splitIterator > 0)
+                    if (playerIDs[i - 1] != playerIDs[i])
                     {
-                        playerData.Add(allData[splitIterator - 1]);
-
-                        if (playerIDs[splitIterator - 1] != playerIDs[splitIterator])
-                        {
-                            players.Add(new PlayerData(playerData));
-                            playerData.Clear();
-                        }
-                        else if (rawData.Split(splitChar)[splitIterator + 1] == "END")
-                        {
-                            playerData.Add(allData[splitIterator]);
-                            players.Add(new PlayerData(playerData));
-                        }
+                        players.Add(new PlayerData(playerData));
+                        playerData.Clear();
                     }
-                    splitIterator++;
+                    else if (rawDataSplit[i + 1] == "END")
+                    {
+                        playerData.Add(allData[i]);
+                        players.Add(new PlayerData(playerData));
+                    }
                 }
             }
         }
