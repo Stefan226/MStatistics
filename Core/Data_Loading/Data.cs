@@ -17,13 +17,20 @@ namespace Core
 
         public Data()
         {
-            
+
+        }
+
+        public Data(string path, string username)
+        {
+            rawData = ReadOnePlayer(path, username);
+            playerIDs = new string[512];
+            FilterData(rawData);
         }
 
         public Data(string path)
         {
             rawData = ReadAll(path);
-            playerIDs = new string[numberOfFiles * 10];
+            playerIDs = new string[8000];
             FilterData(rawData);
         }
 
@@ -48,6 +55,29 @@ namespace Core
             return ReadAll(Console.ReadLine());
         }
 
+        string ReadOnePlayer(string path, string username)
+        {
+            string data = "";
+            string finalPath = "Analytics/" + path;
+
+            if (Directory.Exists(finalPath) && path != "")
+            {
+                foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
+                {
+                    if (file.Split('\\')[1].StartsWith(username))
+                    {
+                        data += File.ReadAllText(file);
+                        numberOfFiles++;
+                    }
+                }
+                return data + "END";
+            }
+            Console.WriteLine(finalPath);
+            Console.WriteLine("Invalid Date");
+            Console.WriteLine("Enter the date in the following format yyyy-mm-dd: ");
+            return ReadAll(Console.ReadLine());
+        }
+
         void FilterData(string rawData, char splitChar = '&')
         {
             int splitIterator = 0;
@@ -58,7 +88,7 @@ namespace Core
                 if (rawData[i] == splitChar)
                 {
                     allData.Add(rawData.Split(splitChar)[splitIterator]);
-                    playerIDs[splitIterator] = allData[splitIterator].Split(',')[0];
+                    playerIDs[splitIterator] = allData[splitIterator].Split(',')[1];
 
                     if (splitIterator > 0)
                     {
@@ -98,11 +128,11 @@ namespace Core
             return playerData;
         }
 
-        public PlayerData GetPlayerData(string playerID)
+        public PlayerData GetPlayerData(string idOrUsername)
         {
             for (int i = 0; i < players.Count; i++)
             {
-                if (players[i].PlayerID == playerID)
+                if (players[i].PlayerID == idOrUsername || players[i].PlayerUsername == idOrUsername)
                     return players[i];
             }
 

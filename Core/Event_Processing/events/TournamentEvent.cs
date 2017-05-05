@@ -47,7 +47,7 @@ namespace Core.Event_Processing.events
         void CalculateGameMetrics()
         {
             //TODO
-            throw new NotImplementedException();   
+            throw new NotImplementedException();
         }
 
         public void Print()

@@ -11,6 +11,10 @@ namespace Core
         string playerID;
         public string PlayerID { get { return playerID; } set {playerID = value; } }
 
+        string playerUsername;
+        public string PlayerUsername { get => playerUsername; set => playerUsername = value; }
+
+
         List<string> playerData = new List<string>();
         List<Event> events = new List<Event>();
 
@@ -22,7 +26,10 @@ namespace Core
         public PlayerData(List<string> playerData)
         {
             this.playerData = playerData;
-            playerID = playerData[0].Split(',')[0];
+            string[] player = playerData[0].Split(',');
+
+            playerUsername = player[0];
+            playerID = player[1];
             AddEvents();
         }
     
@@ -44,6 +51,7 @@ namespace Core
 
         public void Print()
         {
+            Console.WriteLine("USERNAME: " + playerUsername);
             Console.WriteLine("PlayerID: " + playerID);
             Console.WriteLine("COUNTRY: " + events[0].Country);
             for (int i = 0; i < events.Count; i++)
