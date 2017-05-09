@@ -81,6 +81,17 @@ namespace Core.Event_Processing
             return filteredEvents;
         }
 
+
+        public void RemoveEvent(Event _event)
+        {
+            for (int i = 0; i < events.Count; i++)
+            {
+                if (events[i] == _event)
+                    events.Remove(_event);
+            }
+        }
+
+
         public int GetEventsCount()
         {
             return events.Count;

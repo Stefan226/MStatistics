@@ -69,5 +69,24 @@ namespace Core.KPI
             int sum = GetActiveUsers(month, pathBegin, pathEnd, dayIndex);
             return sum / 7;
         }
+
+        public int GetActiveUsers(MONTHS monthBegin, MONTHS monthEnd, string pathBegin, string pathEnd)
+        {
+            throw new NotImplementedException();
+        }
+
+        int GetDaysInMonth(MONTHS month)
+        {
+
+            if ((int)month % 2 == 0)
+                return 30;
+            else
+            {
+                if (month == MONTHS.FEBRUARY)
+                    return 29;
+                else
+                    return 31;
+            }
+        }
     }
 }

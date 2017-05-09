@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,8 +18,7 @@ namespace Core
             string pid = "g18148900640404897985";
 
             Console.WriteLine("Enter the date in the following format yyyy-mm-dd: ");
-            Data data = new Data(/*Console.ReadLine()*/MONTHS.APRIL, "30");
-            //Data data = new Data("2017-04-30", "zizi1999901");
+            Data data = new Data(/Console.ReadLine()*/MONTHS.APRIL, "30");            //Data data = new Data("2017-04-30", "zizi1999901");
 
             Console.WriteLine("Data Loaded!");
 
@@ -27,13 +26,14 @@ namespace Core
             //string playerID = Console.ReadLine();
             ////PlayerData playerData = new PlayerData(data.LoadPlayerData(playerID));
 
-            PlayerData playerData = data.GetPlayerData("zizi1999901");
+            PlayerData playerData = data.GetPlayerData("amd36");
 
             playerData.Print();
             ////data.Print();
 
-            //Session session = new Session();
+            Session session = new Session();
 
+<<<<<<< HEAD
             Console.WriteLine("Weekly Active Users: " + new DAU().GetActiveUsers(MONTHS.APRIL, "23", "24"));
             Console.WriteLine("Weekly Active Users AVG: " + new DAU().GetActiveUsersAVG(MONTHS.APRIL, "23", "24"));
 
@@ -43,6 +43,11 @@ namespace Core
             //    Console.WriteLine(username);
             //}
 
+=======
+            Console.WriteLine("Weekly Active Users: " + new DAU().GetActiveUsers(MONTHS.APRIL, "23", "30"));
+            Console.WriteLine("Weekly Active Users AVG: " + new DAU().GetActiveUsersAVG(MONTHS.APRIL, "23", "30"));
+            Console.WriteLine("Session Time: " + session.GetTotalSessionTime(playerData));
+>>>>>>> origin/master
             //Console.WriteLine(session.GetSessionTime(playerData));
             //Console.WriteLine(session.GetSessionTimeInt(playerData));
             //Console.WriteLine("Average session: " + session.GetAvgSessionTime(data.GetPlayers(), TIME.MINUTES));
@@ -60,12 +65,6 @@ namespace Core
             //{
             //    Console.WriteLine(e);
             //}
-
-            foreach (PlayerData player in data.GetPlayers())
-            {
-                if (player.PlayerID == "g01528621778490560522")
-                    Console.WriteLine("NASAO");
-            }
 
             Console.ReadLine();
 
