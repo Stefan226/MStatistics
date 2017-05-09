@@ -18,7 +18,7 @@ namespace Core
             string pid = "g18148900640404897985";
 
             Console.WriteLine("Enter the date in the following format yyyy-mm-dd: ");
-            Data data = new Data(/*Console.ReadLine()*/"2017-04-30");
+            Data data = new Data(/*Console.ReadLine()*/MONTHS.APRIL, "30");
             //Data data = new Data("2017-04-30", "zizi1999901");
 
             Console.WriteLine("Data Loaded!");
@@ -36,6 +36,13 @@ namespace Core
 
             Console.WriteLine("Weekly Active Users: " + new DAU().GetActiveUsers(MONTHS.APRIL, "23", "24"));
             Console.WriteLine("Weekly Active Users AVG: " + new DAU().GetActiveUsersAVG(MONTHS.APRIL, "23", "24"));
+
+            //List<string> usernames = data.GetPlayerUsernames(MONTHS.APRIL, "23");
+            //foreach (string username in usernames)
+            //{
+            //    Console.WriteLine(username);
+            //}
+
             //Console.WriteLine(session.GetSessionTime(playerData));
             //Console.WriteLine(session.GetSessionTimeInt(playerData));
             //Console.WriteLine("Average session: " + session.GetAvgSessionTime(data.GetPlayers(), TIME.MINUTES));
