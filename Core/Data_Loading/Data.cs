@@ -7,6 +7,22 @@ using System.Threading.Tasks;
 
 namespace Core
 {
+    public enum MONTHS
+    {
+        JANUARY = 01,
+        FEBRUARY = 02,
+        MARCH = 03,
+        APRIL = 04,
+        MAY = 05,
+        JUNE = 06,
+        JULY = 07,
+        AUGUST = 08,
+        SEPTEMBER = 09,
+        OKTOBER = 10,
+        NOVEMBER = 11,
+        DECEMBER = 12
+    }
+
     public class Data
     {
         string rawData;
@@ -20,27 +36,36 @@ namespace Core
 
         }
 
-        public Data(string path, string username)
+        public Data(MONTHS month, string day, string username)
         {
-            rawData = ReadOnePlayer(path, username);
+            rawData = ReadOnePlayer(month, day, username);
             playerIDs = new string[512];
             FilterData(rawData);
         }
 
-        public Data(string path)
+        public Data(MONTHS month, string day)
         {
-            rawData = ReadAll(path);
+            rawData = ReadAll(month, day);
             playerIDs = new string[15000];
             FilterData(rawData);
         }
 
 
-        string ReadAll(string path)
+        string ReadAll(MONTHS month, string day)
         {
             string data = "";
-            string finalPath = "Analytics/" + path;
 
-            if (Directory.Exists(finalPath) && path != "")
+            int _month = (int)month;
+            string finalMonth = "";
+
+            if ((int)month < 10)
+                finalMonth = "0" + _month;
+            else
+                finalMonth = _month + "";
+
+            string finalPath = "Analytics/" + "2017-" + finalMonth + "-" + day;
+
+            if (Directory.Exists(finalPath) && day != "")
             {
                 foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
                 {
@@ -52,15 +77,24 @@ namespace Core
             Console.WriteLine(finalPath);
             Console.WriteLine("Invalid Date");
             Console.WriteLine("Enter the date in the following format yyyy-mm-dd: ");
-            return ReadAll(Console.ReadLine());
+            return ReadAll(month, Console.ReadLine());
         }
 
-        string ReadOnePlayer(string path, string username)
+        string ReadOnePlayer(MONTHS month, string day, string username)
         {
             string data = "";
-            string finalPath = "Analytics/" + path;
 
-            if (Directory.Exists(finalPath) && path != "")
+            int _month = (int)month;
+            string finalMonth = "";
+
+            if ((int)month < 10)
+                finalMonth = "0" + _month;
+            else
+                finalMonth = _month + "";
+
+            string finalPath = "Analytics/" + "2017-" + finalMonth + "-" + day;
+
+            if (Directory.Exists(finalPath) && day != "")
             {
                 foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
                 {
@@ -75,7 +109,7 @@ namespace Core
             Console.WriteLine(finalPath);
             Console.WriteLine("Invalid Date");
             Console.WriteLine("Enter the date in the following format yyyy-mm-dd: ");
-            return ReadAll(Console.ReadLine());
+            return ReadOnePlayer(month, Console.ReadLine(), Console.ReadLine());
         }
 
         void FilterData(string rawData, char splitChar = '&')
@@ -130,6 +164,32 @@ namespace Core
             {
                 if (players[i].PlayerID == idOrUsername || players[i].PlayerUsername == idOrUsername)
                     return players[i];
+            }
+
+            return null;
+        }
+
+        public List<string> GetPlayerUsernames(MONTHS month, string day)
+        {
+            int _month = (int)month;
+            string finalMonth = "";
+
+            if ((int)month < 10)
+                finalMonth = "0" + _month;
+            else
+                finalMonth = _month + "";
+
+            string finalPath = "Analytics/" + "2017-" + finalMonth + "-" + day;
+
+            List<string> usernames = new List<string>();
+
+            if (Directory.Exists(finalPath))
+            {
+                foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
+                {
+                    usernames.Add(file.Split(' ')[0].Split('\\')[1]);
+                }
+                return usernames;
             }
 
             return null;
