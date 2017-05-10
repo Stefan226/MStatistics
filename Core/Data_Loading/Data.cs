@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -187,13 +187,39 @@ namespace Core
             {
                 foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
                 {
-                    usernames.Add(file.Split(' ')[0].Split('\\')[1]);
+                    usernames.Add(file.Split(' ')[0].Split(Path.DirectorySeparatorChar)[2]);
                 }
                 return usernames;
             }
 
             return null;
         }
+
+		public List<string> GetPlayerIDs(MONTHS month, string day)
+		{
+			int _month = (int)month;
+			string finalMonth = "";
+
+			if ((int)month < 10)
+				finalMonth = "0" + _month;
+			else
+				finalMonth = _month + "";
+
+			string finalPath = "Analytics/" + "2017-" + finalMonth + "-" + day;
+
+            List<string> usernames = new List<string>();
+
+			if (Directory.Exists(finalPath))
+			{
+				foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
+				{
+                    usernames.Add(file.Split(' ')[2].Split('.')[0]);
+                }
+				return usernames;
+			}
+
+			return null;
+		}
 
         public List<PlayerData> GetPlayers()
         {

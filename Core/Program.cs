@@ -19,17 +19,19 @@ namespace Core
 
             Console.WriteLine("Data Loaded!");
 
-            PlayerData playerData = data.GetPlayerData("AdeghaniLegend6987");
+            PlayerData playerData = data.GetPlayerData("g06768074634392902084");
 
             playerData.Print();
             ////data.Print();
 
-            Session session = new Session();
+            Console.WriteLine(playerData.PlayerUsername);
+
+            //Session session = new Session();
 
             Console.WriteLine("Weekly Active Users: " + new DAU().GetActiveUsers(MONTHS.APRIL, "23", "24"));
             Console.WriteLine("Weekly Active Users AVG: " + new DAU().GetActiveUsersAVG(MONTHS.APRIL, "23", "24"));
 
-            //List<string> usernames = data.GetPlayerUsernames(MONTHS.APRIL, "23");
+            //List<string> usernames = data.GetPlayerUsernames(MONTHS.APRIL, "25");
             //foreach (string username in usernames)
             //{
             //    Console.WriteLine(username);
@@ -37,6 +39,13 @@ namespace Core
 
             Console.WriteLine("Weekly Active Users: " + new DAU().GetActiveUsers(MONTHS.APRIL, "23", "30"));
             Console.WriteLine("Weekly Active Users AVG: " + new DAU().GetActiveUsersAVG(MONTHS.APRIL, "23", "30"));
+
+
+
+
+            Console.WriteLine("RETENTION: " + new Retention().GetRetentionDayOne(MONTHS.APRIL, "30"));
+
+
             //Console.WriteLine("Session Time: " + session.GetTotalSessionTime(playerData));
 
             //Console.WriteLine(session.GetSessionTime(playerData));
