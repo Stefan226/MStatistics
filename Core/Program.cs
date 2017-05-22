@@ -14,12 +14,12 @@ namespace Core
     {
         static void Main(string[] args)
         {
-            Data data = new Data(MONTHS.APRIL, "30");            
+            Data data = new Data(MONTHS.MAY, "21");            
             //Data data = new Data("2017-04-30", "zizi1999901");
 
             Console.WriteLine("Data Loaded!");
 
-            PlayerData playerData = data.GetPlayerData("g06768074634392902084");
+            PlayerData playerData = data.GetPlayerData("g13914798202051745502");
 
             playerData.Print();
             ////data.Print();
@@ -43,10 +43,12 @@ namespace Core
 
 
 
-            Console.WriteLine("RETENTION: " + new Retention().GetRetentionDayOne(MONTHS.APRIL, "30"));
+            Console.WriteLine("RETENTIONDAY1: " + new Retention().GetRetentionDayOne(MONTHS.MAY, "14"));
+            Console.WriteLine("RETENTIONDAY7: " + new Retention().GetRetentionDaySeven(MONTHS.MAY, "14"));
 
 
-            //Console.WriteLine("Session Time: " + session.GetTotalSessionTime(playerData));
+
+			Console.WriteLine("Session Time: " + new Session().GetTotalSessionTime(playerData));
 
             //Console.WriteLine(session.GetSessionTime(playerData));
             //Console.WriteLine(session.GetSessionTimeInt(playerData));

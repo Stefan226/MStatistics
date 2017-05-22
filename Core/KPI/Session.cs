@@ -111,6 +111,8 @@ namespace Core.KPI
                 index++;
             }
 
+            Console.WriteLine("FINAL: " + finalTime);
+
             return ReturnHours(finalTime) + ":" + ReturnMinutes(finalTime) + ":" + ReturnSecounds(finalTime);
         }
 

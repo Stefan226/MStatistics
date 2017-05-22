@@ -77,12 +77,21 @@ namespace Core
 
         public void Print(int i)
         {
+           
+
             Console.WriteLine("E: " + (i + 1));
             Console.WriteLine("DATE/TIME: " + dateAndTime);
             Console.WriteLine("SCENE: " + scene);
             Console.WriteLine("EVENT NAME: " + eventName);
             Console.WriteLine("EVENT VALUE: " + eventValue);
             Console.WriteLine("*********************");
+        }
+
+
+
+        public override string ToString()
+        {
+            return ("DATE/TIME: " + dateAndTime + "\n" + "SCENE: " + scene + "\n" + "EVENT NAME: " + eventName + "\n" + "EVENT VALUE: " + eventValue + "\n" + "*********************");
         }
     }
 

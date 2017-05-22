@@ -56,7 +56,7 @@ namespace Core
             Console.WriteLine("COUNTRY: " + events[0].Country);
             for (int i = 0; i < events.Count; i++)
             {
-                events[i].Print(i);
+                Console.WriteLine("E: " + (i + 1) + "\n" + events[i]);
             }
         }
 
