@@ -46,7 +46,7 @@ namespace Core
         public Data(MONTHS month, string day)
         {
             rawData = ReadAll(month, day);
-            playerIDs = new string[15000];
+            playerIDs = new string[25000];
             FilterData(rawData);
         }
 

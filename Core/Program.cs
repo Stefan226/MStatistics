@@ -14,12 +14,12 @@ namespace Core
     {
         static void Main(string[] args)
         {
-            Data data = new Data(MONTHS.MAY, "21");            
+            Data data = new Data(MONTHS.JUNE, "25");            
             //Data data = new Data("2017-04-30", "zizi1999901");
 
             Console.WriteLine("Data Loaded!");
 
-            PlayerData playerData = data.GetPlayerData("g13914798202051745502");
+            PlayerData playerData = data.GetPlayerData("g07341007839018303203");
 
             playerData.Print();
             ////data.Print();
@@ -28,8 +28,8 @@ namespace Core
 
             //Session session = new Session();
 
-            Console.WriteLine("Weekly Active Users: " + new DAU().GetActiveUsers(MONTHS.APRIL, "23", "24"));
-            Console.WriteLine("Weekly Active Users AVG: " + new DAU().GetActiveUsersAVG(MONTHS.APRIL, "23", "24"));
+            Console.WriteLine("Weekly Active Users: " + new DAU().GetActiveUsers(MONTHS.JUNE, "21", "22"));
+            Console.WriteLine("Weekly Active Users AVG: " + new DAU().GetActiveUsersAVG(MONTHS.JUNE, "21", "22"));
 
             //List<string> usernames = data.GetPlayerUsernames(MONTHS.APRIL, "25");
             //foreach (string username in usernames)
@@ -43,18 +43,18 @@ namespace Core
 
 
 
-            Console.WriteLine("RETENTIONDAY1: " + new Retention().GetRetentionDayOne(MONTHS.MAY, "14"));
-            Console.WriteLine("RETENTIONDAY7: " + new Retention().GetRetentionDaySeven(MONTHS.MAY, "14"));
+            Console.WriteLine("RETENTIONDAY1: " + new Retention().GetRetentionDayOne(MONTHS.JUNE, "21"));
+            Console.WriteLine("RETENTIONDAY7: " + new Retention().GetRetentionDaySeven(MONTHS.JUNE, "21"));
 
 
 
-			Console.WriteLine("Session Time: " + new Session().GetTotalSessionTime(playerData));
+			//Console.WriteLine("Session Time: " + new Session().GetTotalSessionTime(playerData));
 
             //Console.WriteLine(session.GetSessionTime(playerData));
             //Console.WriteLine(session.GetSessionTimeInt(playerData));
             //Console.WriteLine("Average session: " + session.GetAvgSessionTime(data.GetPlayers(), TIME.MINUTES));
 
-            //EventProcessor processor = new EventProcessor(data.GetPlayerData("g11990376020229995298"));
+            //EventProcessor processor = new EventProcessor(data.GetPlayerData("g00132286129678147304"));
             //try
             //{
             //    TournamentEvent tournament = new TournamentEvent(processor);
@@ -67,6 +67,10 @@ namespace Core
             //{
             //    Console.WriteLine(e);
             //}
+
+
+            CsvExporter exporter = new CsvExporter(data);
+            exporter.CreateCSVString().SaveToFile("csvText");
 
             Console.ReadLine();
 
