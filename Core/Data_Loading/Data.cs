@@ -18,7 +18,7 @@ namespace Core
         JULY = 07,
         AUGUST = 08,
         SEPTEMBER = 09,
-        OKTOBER = 10,
+        OCTOBER = 10,
         NOVEMBER = 11,
         DECEMBER = 12
     }
@@ -50,7 +50,6 @@ namespace Core
             FilterData(rawData);
         }
 
-
         string ReadAll(MONTHS month, string day)
         {
             string data = "";
@@ -63,7 +62,10 @@ namespace Core
             else
                 finalMonth = _month + "";
 
-            string finalPath = "Analytics/" + "2017-" + finalMonth + "-" + day;
+            if (day.Length == 1)
+                day = "0" + day;
+
+            string finalPath = "analytics/" + "2017-" + finalMonth + "-" + day;
 
             if (Directory.Exists(finalPath) && day != "")
             {
@@ -74,10 +76,38 @@ namespace Core
                 }
                 return data + "END";
             }
-            Console.WriteLine(finalPath);
-            Console.WriteLine("Invalid Date");
-            Console.WriteLine("Enter the date in the following format yyyy-mm-dd: ");
+
             return ReadAll(month, Console.ReadLine());
+        }
+
+        public Data InitRawData(MONTHS month, string day)
+        {
+            string data = "";
+
+            int _month = (int)month;
+            string finalMonth = "";
+
+            if ((int)month < 10)
+                finalMonth = "0" + _month;
+            else
+                finalMonth = _month + "";
+
+            if (day.Length == 1)
+                day = "0" + day;
+
+            string finalPath = "analytics/" + "2017-" + finalMonth + "-" + day;
+
+            if (Directory.Exists(finalPath) && day != "")
+            {
+                foreach (string file in Directory.GetFiles(finalPath, "*.txt"))
+                {
+                    data += File.ReadAllText(file);
+                    numberOfFiles++;
+                }
+                this.rawData = data;
+            }
+
+            return new Data(month, day);
         }
 
         string ReadOnePlayer(MONTHS month, string day, string username)
@@ -92,7 +122,10 @@ namespace Core
             else
                 finalMonth = _month + "";
 
-            string finalPath = "Analytics/" + "2017-" + finalMonth + "-" + day;
+            if (day.Length == 1)
+                day = "0" + day;
+
+            string finalPath = "analytics/" + "2017-" + finalMonth + "-" + day;
 
             if (Directory.Exists(finalPath) && day != "")
             {
@@ -138,6 +171,14 @@ namespace Core
                     }
                 }
             }
+        }
+
+        public void SaveToCSV(string fileName)
+        {
+            string[] rawDataSplit = rawData.Split('&');
+            File.WriteAllLines("csv/" + fileName + ".txt", rawDataSplit);
+
+            Console.WriteLine("DONE!");
         }
 
         public List<string> LoadPlayerData(string playerID)
@@ -232,6 +273,56 @@ namespace Core
             {
                 Console.WriteLine(str);
             }
+        }
+
+        public static MONTHS MonthChosen(string month)
+        {
+            switch (month)
+            {
+                case "1":
+                    return MONTHS.JANUARY;
+                case "2":
+                    return MONTHS.FEBRUARY;
+                case "3":
+                    return MONTHS.MARCH;
+                case "4":
+                    return MONTHS.APRIL;
+                case "5":
+                    return MONTHS.MAY;
+                case "6":
+                    return MONTHS.JUNE;
+                case "7":
+                    return MONTHS.JULY;
+                case "8":
+                    return MONTHS.AUGUST;
+                case "9":
+                    return MONTHS.SEPTEMBER;
+                case "10":
+                    return MONTHS.OCTOBER;
+                case "11":
+                    return MONTHS.NOVEMBER;
+                case "12":
+                    return MONTHS.DECEMBER;
+            }
+            return MonthChosen(month);
+        }
+
+        public static bool CheckIfDataExists(MONTHS month, string day)
+        {
+            int _month = (int)month;
+            string finalMonth = "";
+
+            if ((int)month < 10)
+                finalMonth = "0" + _month;
+            else
+                finalMonth = _month + "";
+
+            if (day.Length == 1)
+                day = "0" + day;
+
+            string finalPath = "analytics/" + "2017-" + finalMonth + "-" + day;
+
+            return Directory.Exists(finalPath);
         }
     }
 }
